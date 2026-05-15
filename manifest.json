@@ -1,0 +1,43 @@
+{
+  "name": "Schildkrötenverwaltungsapp",
+  "short_name": "Schildkröten",
+  "description": "Verwalte deine Schildkröten und deren Akten",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#2ecc71",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%232ecc71' rx='45'/><circle cx='96' cy='96' r='70' fill='%2327ae60'/><circle cx='96' cy='65' r='15' fill='%23ffffff'/></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%232ecc71' rx='120'/><circle cx='256' cy='256' r='180' fill='%2327ae60'/><circle cx='256' cy='200' r='40' fill='%23ffffff'/></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["productivity"],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'><rect width='540' height='720' fill='%23f5f5f5'/><rect width='540' height='60' fill='%232ecc71'/><text x='270' y='40' text-anchor='middle' fill='white' font-size='24' font-weight='bold'>Schildkröten</text></svg>",
+      "sizes": "540x720",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Neue Schildkröte",
+      "short_name": "Neu",
+      "description": "Füge eine neue Schildkröte hinzu",
+      "url": "./index.html?action=new",
+      "icons": [{ "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><text x='96' y='120' text-anchor='middle' font-size='140' fill='%232ecc71'>+</text></svg>", "sizes": "192x192", "type": "image/svg+xml" }]
+    }
+  ]
+}

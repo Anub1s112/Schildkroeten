@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Schildkrötenverwaltungsapp - Verwalte deine Schildkröten und deren Akten">
+    <meta name="theme-color" content="#2ecc71">
+    <title>Schildkrötenverwaltung</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%232ecc71'/><circle cx='50' cy='50' r='35' fill='%2327ae60'/></svg>">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app" class="app-container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-content">
+                <h1 class="app-title">🐢 Schildkrötenverwaltung</h1>
+                <div class="nav-buttons">
+                    <button id="viewToggle" class="nav-btn" title="Ansicht wechseln">📋</button>
+                    <button id="settingsBtn" class="nav-btn" title="Einstellungen">⚙️</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Übersicht View -->
+            <div id="overviewView" class="view active">
+                <div class="overview-header">
+                    <h2>Meine Schildkröten</h2>
+                    <button id="addTurtleBtn" class="btn btn-primary">+ Neue Schildkröte</button>
+                </div>
+                
+                <div class="filter-section">
+                    <button class="filter-btn active" data-filter="all">Alle</button>
+                    <button class="filter-btn" data-filter="owned">Im Besitz</button>
+                    <button class="filter-btn" data-filter="sold">Verkauft</button>
+                </div>
+
+                <div id="turtleList" class="turtle-grid">
+                    <!-- Schildkröten werden hier eingefügt -->
+                </div>
+            </div>
+
+            <!-- Detail View -->
+            <div id="detailView" class="view">
+                <button id="backBtn" class="btn btn-secondary">← Zurück</button>
+                <div id="turtleDetail" class="turtle-detail">
+                    <!-- Details werden hier eingefügt -->
+                </div>
+            </div>
+
+            <!-- Bearbeitungs View -->
+            <div id="editView" class="view">
+                <button id="backFromEditBtn" class="btn btn-secondary">← Zurück</button>
+                <form id="turtleForm" class="turtle-form">
+                    <h2>Schildkröte bearbeiten</h2>
+                    
+                    <div class="form-group">
+                        <label for="turtleName">Name der Schildkröte</label>
+                        <input type="text" id="turtleName" required placeholder="z.B. Schildi">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="turtleBreedingNumber">Zuchtbuchnummer</label>
+                            <input type="text" id="turtleBreedingNumber" placeholder="z.B. ZB-2024-001">
+                        </div>
+                        <div class="form-group">
+                            <label for="turtlePaperId">Papier-ID</label>
+                            <input type="text" id="turtlePaperId" placeholder="z.B. P-2024-001">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="turtleBirthDate">Geburtsdatum</label>
+                        <input type="date" id="turtleBirthDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="turtleSold" name="sold">
+                            Verkauft
+                        </label>
+                    </div>
+
+                    <div id="buyerInfo" class="buyer-info hidden">
+                        <h3>Käuferinformationen</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="buyerFirstName">Vorname</label>
+                                <input type="text" id="buyerFirstName" placeholder="Vorname">
+                            </div>
+                            <div class="form-group">
+                                <label for="buyerLastName">Nachname</label>
+                                <input type="text" id="buyerLastName" placeholder="Nachname">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="buyerAddress">Adresse</label>
+                            <textarea id="buyerAddress" placeholder="Straße, Hausnummer\nPLZ Ort"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="sellDate">Verkaufsdatum</label>
+                            <input type="date" id="sellDate">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Bilder</label>
+                        <div class="image-section">
+                            <button type="button" id="captureImageBtn" class="btn btn-secondary">📷 Foto machen</button>
+                            <button type="button" id="uploadImageBtn" class="btn btn-secondary">📁 Bild hochladen</button>
+                        </div>
+                        <input type="file" id="imageInput" accept="image/*" multiple hidden>
+                        <input type="file" id="cameraInput" accept="image/*" capture="environment" hidden>
+                        <div id="imagePreview" class="image-preview">
+                            <!-- Bilder werden hier angezeigt -->
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Speichern</button>
+                        <button type="button" id="deleteTurtleBtn" class="btn btn-danger">Löschen</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal für Bildvergleich -->
+    <div id="imageMatchModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Bildvergleich</h2>
+            <p>Welches Bild passt am besten?</p>
+            <div id="matchOptions" class="match-options">
+                <!-- Optionen werden hier eingefügt -->
+            </div>
+            <button id="closeMatchModal" class="btn btn-secondary">Abbrechen</button>
+        </div>
+    </div>
+
+    <!-- Modal für Einstellungen -->
+    <div id="settingsModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Einstellungen</h2>
+            <div class="settings-group">
+                <label>
+                    <input type="checkbox" id="darkModeToggle">
+                    Dunkler Modus
+                </label>
+            </div>
+            <div class="settings-group">
+                <button id="exportDataBtn" class="btn btn-secondary">Daten exportieren</button>
+                <button id="importDataBtn" class="btn btn-secondary">Daten importieren</button>
+            </div>
+            <button id="closeSettingsModal" class="btn btn-secondary">Schließen</button>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="db.js"></script>
+    <script src="imageProcessor.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
